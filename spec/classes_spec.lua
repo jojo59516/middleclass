@@ -73,6 +73,11 @@ describe('A Class', function()
           assert.is_true(AClass.subclasses[SubClass])
         end)
 
+        it('instance of it should have a table index metamethod in default', function ()
+          local obj = SubClass()
+          assert.is_table(getmetatable(obj).__index)
+        end)
+
       end)
 
     end)

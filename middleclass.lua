@@ -33,23 +33,11 @@ local function _createIndexWrapper(aClass, f)
     return aClass.__instanceDict
   elseif type(f) == "function" then
     return function(self, name)
-      local value = aClass.__instanceDict[name]
-
-      if value ~= nil then
-        return value
-      else
-        return (f(self, name))
-      end
+      return aClass.__instanceDict[name] or f(self, name)
     end
   else -- if  type(f) == "table" then
     return function(self, name)
-      local value = aClass.__instanceDict[name]
-
-      if value ~= nil then
-        return value
-      else
-        return f[name]
-      end
+      return aClass.__instanceDict[name] or f[name]
     end
   end
 end
